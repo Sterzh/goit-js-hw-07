@@ -3,22 +3,25 @@ import { galleryItems } from "./gallery-items.js";
 
 const gallery = document.querySelector(".gallery");
 
-const addGallery = galleryItems
-  .map(
-    ({ preview, original, description }) =>
-      `<div class="gallery__item" > <a class="gallery__link" href="${original}"><img class="gallery__img" src="${preview}" data-source="${original}" alt="${description}" width="100%"></a></div>`
-  )
-  .join("");
+gallery.innerHTML = galleryItems.reduce(
+  (html, current) =>
+    html +
+    `<div class="gallery__item" > <a class="gallery__link" href="${current.original}"><img class="gallery__image" src="${current.preview}" data-source="${current.original}" alt="${current.description}"></a></div>`,
+  ""
+);
 
-gallery.insertAdjacentHTML("afterend", addGallery);
+gallery.addEventListener("click", (e) => {
+  e.preventDefault();
+  basicLightbox
+    .create(`<img width="1400" height="900" src="${e.target.dataset.source}">`)
+    .show();
 
-// const imgStyle = document.querySelector(".gallery__item");
+  document.addEventListener("keydown", esc);
 
-// imgStyle.style.width = 200 + "px";
-
-// console.log(gallery);
-// gallery.append(...addGallery);
-
-// console.log(addGallery);
-// console.log(galleryItems);
-// console.log(addGallery);
+  function esc(e) {
+    if (e.code === "Escape") {
+      document.removeEventListener("keydown", esc);
+      console.log("test");
+    }
+  }
+});
