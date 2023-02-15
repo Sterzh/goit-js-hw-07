@@ -10,10 +10,7 @@ gallery.innerHTML = galleryItems.reduce(
   ""
 );
 
-gallery.addEventListener("click", (e) => {
-  e.preventDefault();
-  let litebox = new SimpleLightbox(".gallery a", {
-    captionDelay: 250,
-    captionsData: "alt",
-  });
+const litebox = new SimpleLightbox(".gallery a", {
+  captionDelay: 250,
+  captionsData: "alt",
 });

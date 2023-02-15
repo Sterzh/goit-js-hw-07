@@ -12,18 +12,20 @@ gallery.innerHTML = galleryItems.reduce(
 
 gallery.addEventListener("click", (e) => {
   e.preventDefault();
-  const lightbox = basicLightbox.create(
-    `<img width="1400" height="900" src="${e.target.dataset.source}">`
-  );
+  if (e.target.className === "gallery__image") {
+    const lightbox = basicLightbox.create(
+      `<img width="1400" height="900" src="${e.target.dataset.source}">`
+    );
 
-  lightbox.show();
-  document.addEventListener("keydown", esc);
+    lightbox.show();
 
-  function esc(e) {
-    if (e.code === "Escape") {
-      document.removeEventListener("keydown", esc);
-      lightbox.close();
-      console.log(e.code);
+    document.addEventListener("keydown", esc);
+
+    function esc(e) {
+      if (e.code === "Escape") {
+        document.removeEventListener("keydown", esc);
+        lightbox.close();
+      }
     }
   }
 });
