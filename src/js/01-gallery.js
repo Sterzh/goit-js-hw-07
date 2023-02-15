@@ -12,16 +12,18 @@ gallery.innerHTML = galleryItems.reduce(
 
 gallery.addEventListener("click", (e) => {
   e.preventDefault();
-  basicLightbox
-    .create(`<img width="1400" height="900" src="${e.target.dataset.source}">`)
-    .show();
+  const lightbox = basicLightbox.create(
+    `<img width="1400" height="900" src="${e.target.dataset.source}">`
+  );
 
+  lightbox.show();
   document.addEventListener("keydown", esc);
 
   function esc(e) {
     if (e.code === "Escape") {
       document.removeEventListener("keydown", esc);
-      console.log("test");
+      lightbox.close();
+      console.log(e.code);
     }
   }
 });

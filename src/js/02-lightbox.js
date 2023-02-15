@@ -12,9 +12,8 @@ gallery.innerHTML = galleryItems.reduce(
 
 gallery.addEventListener("click", (e) => {
   e.preventDefault();
-
-  let gallery = new SimpleLightbox(".gallery a");
-  gallery.on("show.simplelightbox", function () {
-    // do something…
+  let litebox = new SimpleLightbox(".gallery a", {
+    captionDelay: 250,
+    captionsData: "alt",
   });
 });
